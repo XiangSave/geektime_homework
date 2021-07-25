@@ -20,19 +20,13 @@ func (m *DBModel) queryDepPeople(q string, d int) ([]*DepPeople, error) {
     return depPeoples, nil
 }
 
+
 func (m *DBModel) GetAllDepPeople(d int) ([]*DepPeople, error) {
-    query := "SELECT ;"
+    query := "SELECT  ""
     allPeople, err := m.queryDepPeople(query, d)
-    if err != nil {
-        return nil, fmt.Errorf("获取部门所有用户失败: %w", err)
+    if err != nil && !errors.Is(err, sql.ErrNoRows) {
+        return nil, fmt.Errorf("获取部门所有员工失败: %w", err)
     }
     return allPeople, nil
-}
-```
-
-```go
-allPeople, err := lunchDB.GetAllDepPeople(firstDeptId)
-if err != nil && !errors.Is(err, sql.ErrNoRows) {
-    log.Println(err)
 }
 ```
