@@ -22,7 +22,7 @@ func (m *DBModel) queryDepPeople(q string, d int) ([]*DepPeople, error) {
 
 
 func (m *DBModel) GetAllDepPeople(d int) ([]*DepPeople, error) {
-    query := "SELECT  ""
+    query := "SELECT  "
     allPeople, err := m.queryDepPeople(query, d)
     if err != nil && !errors.Is(err, sql.ErrNoRows) {
         return nil, fmt.Errorf("获取部门所有员工失败: %w", err)
