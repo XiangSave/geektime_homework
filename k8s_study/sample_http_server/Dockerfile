@@ -20,6 +20,6 @@ FROM alpine:3.14
 ARG APP_NAME
 
 WORKDIR /root/
-COPY --from=builder /go/src/app/cmd/${APP_NAME} /root/
+COPY --from=builder /go/src/app/cmd/${APP_NAME} .
 EXPOSE 80
 ENTRYPOINT ["./httpServer"]
