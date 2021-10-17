@@ -1,20 +1,25 @@
+ARG APP_NAME=httpServer
 FROM golang:1.15 as builder
-ARG appName=httpServer
-
+LABEL stage=builder
 LABEL author=xiang
+
+ARG APP_NAME
 ENV GOPROXY="https://goproxy.cn,direct"
 
-WORKDIR /go/src/app
+WORKDIR /go/src/app/
 COPY . .
 
-RUN go get -d -v ./...
-RUN go install -v ./...
-
-RUN cd cmd/${appName} && go build .
+WORKDIR /go/src/app/cmd/${APP_NAME}
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build .
 
 
 
-FROM alpine:3.14 as prod
+
+FROM alpine:3.14
+#FROM ubuntu as prod
+ARG APP_NAME
+
 WORKDIR /root/
-COPY --from=builder /go/src/app/cmd/httpServer/httpServer /root
-CMD ["./httpServer"]
+COPY --from=builder /go/src/app/cmd/${APP_NAME} /root/
+EXPOSE 80
+ENTRYPOINT ["./httpServer"]
