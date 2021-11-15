@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +29,8 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(statusCode)
 	fmt.Fprintln(w, wMsg)
+	time.Sleep(10 * time.Second)
+	defer log.Println("defer")
 
 	log.Printf("apiPath:%s Status:%d RemoteAddress:%s", r.URL.Path, statusCode, rAddress)
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -50,13 +51,23 @@ func (s *Server) Run() error {
 			case <-ctx.Done():
 				return ctx.Err()
 			case <-c:
-				s.cancel()
+				log.Println("run s.Stop()")
+				// s.Stop()
+				s.s.Shutdown(s.ctx)
 			}
 		}
 	})
 
 	if err := eg.Wait(); err != nil && !errors.Is(err, context.Canceled) {
+		// if err := eg.Wait(); err != nil {
 		return err
+	}
+	return nil
+}
+
+func (s *Server) Stop() error {
+	if s.cancel != nil {
+		s.cancel()
 	}
 	return nil
 }
