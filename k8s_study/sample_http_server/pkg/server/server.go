@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -31,6 +30,7 @@ func New(addr string, mux *http.ServeMux) *Server {
 
 func (s *Server) Run() error {
 	s.ctx, s.cancel = context.WithCancel(context.Background())
+
 	eg, ctx := errgroup.WithContext(s.ctx)
 	eg.Go(func() error {
 		defer fmt.Println("Listen defer")
@@ -51,23 +51,15 @@ func (s *Server) Run() error {
 			case <-ctx.Done():
 				return ctx.Err()
 			case <-c:
-				log.Println("run s.Stop()")
-				// s.Stop()
-				s.s.Shutdown(s.ctx)
+				return s.s.Shutdown(s.ctx)
+				// s.cancel()
+
 			}
 		}
 	})
 
-	if err := eg.Wait(); err != nil && !errors.Is(err, context.Canceled) {
-		// if err := eg.Wait(); err != nil {
+	if err := eg.Wait(); err != nil && !errors.Is(err, context.Canceled) && !errors.Is(err, http.ErrServerClosed) {
 		return err
-	}
-	return nil
-}
-
-func (s *Server) Stop() error {
-	if s.cancel != nil {
-		s.cancel()
 	}
 	return nil
 }
