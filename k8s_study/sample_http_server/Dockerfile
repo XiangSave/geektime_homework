@@ -20,5 +20,5 @@ ARG APP_NAME
 
 WORKDIR /root
 COPY --from=builder /go/src/app/cmd/${APP_NAME} .
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["./httpServer"]
