@@ -1,7 +1,6 @@
 ARG APP_NAME=httpServer
 
 FROM golang:1.15 as builder
-LABEL stage=builder
 
 ARG APP_NAME
 RUN GOPROXY="https://goproxy.cn,direct"
