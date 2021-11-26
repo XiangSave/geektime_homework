@@ -1,0 +1,12 @@
+---
+#HttpServer:
+#  ServiceSetting:
+#    ServiceBindIP: "0.0.0.0"
+#    ServicePort: 8080
+#    ServiceLogPath: "./logs/httpServer.log"
+
+HttpServer:
+  ServiceSetting:
+    BindIP: "0.0.0.0"
+    Port: 8080
+    LogPath: "./logs/httpServer.log"

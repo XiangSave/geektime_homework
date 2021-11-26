@@ -21,5 +21,7 @@ func Healthz(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(statusCode)
 	w.Header().Set("Accept", r.Header.Get("Accept"))
 	fmt.Fprintln(w, "health")
-	log.Printf("apiPath:%s Status:%d RemoteAddress:%s", r.URL.Path, statusCode, rAddress)
+
+	requestLogger := log.WithFields(log.Fields{"apiPath": r.URL.Path, "Status": statusCode, "RemoteAddress": rAddress})
+	requestLogger.Info("health")
 }

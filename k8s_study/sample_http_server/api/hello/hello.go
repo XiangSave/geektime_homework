@@ -33,5 +33,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	// time.Sleep(10 * time.Second)
 	// defer log.Println("defer")
 
-	log.Printf("apiPath:%s Status:%d RemoteAddress:%s", r.URL.Path, statusCode, rAddress)
+	// log.Printf("apiPath:%s Status:%d RemoteAddress:%s", r.URL.Path, statusCode, rAddress)
+	requestLogger := log.WithFields(log.Fields{"apiPath": r.URL.Path, "Status": statusCode, "RemoteAddress": rAddress})
+	requestLogger.Infof("response: %s", wMsg)
 }
