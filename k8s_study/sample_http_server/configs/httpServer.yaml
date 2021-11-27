@@ -7,6 +7,6 @@
 
 HttpServer:
   ServiceSetting:
-    BindIP: "0.0.0.0"
-    Port: 8080
-    LogPath: "./logs/httpServer.log"
+    bindIP: "0.0.0.0"
+    port: 8080
+    logPath: "./logs/httpServer.log"

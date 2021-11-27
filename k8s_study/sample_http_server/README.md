@@ -19,11 +19,12 @@
 + 通过 Docker 命令本地启动 httpserver。
 
 ```bash
-$ d build -t http_server:1.0  .
+$ d build -t sample_http_server:1.0  .
 
-$ d run -itd --rm -p 80:80 http_server:1.0
+$ d run -itd -p 8080:8080 -v /home/xxx/httpServer/configs:/root/configs -v /home/xxx/httpServer/logs:/root/logs sample_http_server:1.0
 3358f6cf265af595ae5922bcf30f6cf93fc3927e7263f323444134376461a140
-$ curl localhost:80/healthz
+
+$ curl localhost:8080/healthz
 health
 ```
 
