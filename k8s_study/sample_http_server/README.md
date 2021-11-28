@@ -72,6 +72,7 @@ $ s nsenter  -t 14748 -n ip a
 ### answer
 + kubernetes yaml 
   + deployment: k8smanifests/deploy.yaml
+  + service: k8smanifests/svc.yaml
 
 + 创建 configMap 存储配置文件
 
