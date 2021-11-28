@@ -2,31 +2,45 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: sample_http_server
-  name: sample_http_server
+    app: sample-http-server
+  name: sample-http-server
   namespace: default
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
-      app: sample_http_server
+      app: sample-http-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
-        app: sample_http_server
+        app: sample-http-server
     spec:
       containers:
-      - image: sample_http_server:1.0
-        name: sample_http_server
+      - image: sample-http-server:1.0
+        name: sample-http-server
         ports:
         - containerPort: 8080
+        volumeMounts:
+          - name: conf
+            mountPath: "/root/configs"
+            readOnly: true
+          - name: host-logs
+            mountPath: "/root/logs"
+        # lifecycle:
+        #   preStop:
+        #     exec:
+        #       command: [ "/bin/sh", "-c", "sleep 25 && killall httpServer"]
         livenessProbe:
           failureThreshold: 3
           httpGet:
             path: /healthz
             port: 8080
             scheme: HTTP
-          periodSeconds: 3
+          periodSeconds: 1
           successThreshold: 1
           timeoutSeconds: 1
         readinessProbe:
@@ -35,7 +49,7 @@ spec:
             path: /healthz
             port: 8080
             scheme: HTTP
-          periodSeconds: 3
+          periodSeconds: 1
           successThreshold: 1
           timeoutSeconds: 1
         startupProbe:
@@ -51,5 +65,14 @@ spec:
             cpu: 100m
             memory: 128Mi
           limits:
-            cpu: "1"
-            memory: 1500Mi
+            cpu: 1000m
+            memory: 512Mi
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - name: conf
+          configMap:
+            name: sample-http-server-conf
+        - name: host-logs
+          hostPath:
+            path: /home/xiang/logs
+            type: DirectoryOrCreate

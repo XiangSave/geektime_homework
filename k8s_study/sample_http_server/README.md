@@ -19,9 +19,9 @@
 + 通过 Docker 命令本地启动 httpserver。
 
 ```bash
-$ d build -t sample_http_server:1.0  .
+$ d build -t sample-http-server:1.0  .
 
-$ d run -itd -p 8080:8080 -v /home/xxx/httpServer/configs:/root/configs -v /home/xxx/httpServer/logs:/root/logs sample_http_server:1.0
+$ d run -itd -p 8080:8080 -v /home/xxx/httpServer/configs:/root/configs -v /home/xxx/httpServer/logs:/root/logs sample-http-server:1.0
 3358f6cf265af595ae5922bcf30f6cf93fc3927e7263f323444134376461a140
 
 $ curl localhost:8080/healthz
@@ -47,4 +47,34 @@ $ s nsenter  -t 14748 -n ip a
     link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
     inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
        valid_lft forever preferred_lft forever
+```
+
+## week eight
+### question01
++ 编写 Kubernetes 部署脚本将 httpserver 部署到 kubernetes 集群，需支持：
+  + 优雅启动
+  + 优雅终止
+  + 资源需求和QoS保证
+  + 探活
+  + 日常运维需求、日志等级
+  + 配置和代码分离
+
+### question02
++ 除了将 httpServer 应用优雅的运行在 Kubernetes 之上，我们还应该考虑如何将服务发布给对内和对外的调用方。
++ 来尝试用 Service, Ingress 将你的服务发布给集群外部的调用方吧
++ 在第一部分的基础上提供更加完备的部署 spec，包括（不限于）
+  + Service
+  + Ingress
++ 可以考虑的细节
+  + 如何确保整个应用的高可用
+  + 如何通过证书保证 httpServer 的通讯安全
+
+### answer
++ kubernetes yaml 
+  + deployment: k8smanifests/deploy.yaml
+
++ 创建 configMap 存储配置文件
+
+```bash
+$ k create configmap sample-http-server-conf --from-file=configs/
 ```
