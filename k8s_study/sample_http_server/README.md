@@ -95,7 +95,7 @@ $ cat test-sample-http-server.crt |base64 -w 0
 
   ```bash
 $ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
-```
+  ```
   + 更改 deployment image
   + 更改 ingress-nginx Service spec.type 为 NodePort
   + 配置 CA
