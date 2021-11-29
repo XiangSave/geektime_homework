@@ -9,5 +9,6 @@ spec:
     - port: 80
       protocol: TCP
       name: http
+      targetPort: 8080
   selector:
     app: sample-http-server

@@ -71,9 +71,13 @@ $ s nsenter  -t 14748 -n ip a
 
 ### answer
 + kubernetes yaml 
-  + deployment: k8smanifests/deploy.yaml
-  + service: k8smanifests/svc.yaml
+  + deployment: k8smanifests/nginx-ingress-deployment.yaml
+  + conf:sample-http-server-conf-comfigMap.yaml
+  + service: k8smanifests/sample-http-server-svc.yaml
+  + tls secret:k8smanifests/test-sample-http-server-tls-secret.yaml
+  + ingress:k8smanifests/http-server-ingress.yaml
 
+### note
 + 创建 configMap 存储配置文件
 
 ```bash
@@ -82,9 +86,21 @@ $ k create configmap sample-http-server-conf --from-file=configs/
 + 创建 tls 证书
 
 ```bash
-$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test-sample-http-server.key -out test-sample-http-server.crt -subj "/CN=test-sample-http-server.local/O=xiang"
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test-sample-http-server.key -out test-sample-http-server.crt -subj "/CN=*/O=xiang"
 $ cat test-sample-http-server.key |base64 -w 0
 $ cat test-sample-http-server.crt |base64 -w 0
-
-
 ```
++ 安装 ingress-nginx(k8smanifests/nginx-ingress-deployment.yaml)
+  + 下载官网 deployment
+
+  ```bash
+$ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+```
+  + 更改 deployment image
+  + 更改 ingress-nginx Service spec.type 为 NodePort
+  + 配置 CA
+
+  ```bash
+  $ CA=$(kubectl -n ingress-nginx get secret ingress-nginx-admission -ojsonpath='{.data.ca}')
+  $ kubectl patch validatingwebhookconfigurations ingress-nginx-admission --type='json' -p='[{"op": "add", "path": "/webhooks/0/clientConfig/caBundle", "value":"'$CA'"}]'
+  ```

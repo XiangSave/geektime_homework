@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - test-sample-http-server.local
+        - test.httpserver.local
       secretName: test-sample-http-server-tls
   rules:
-    - host: test-sample-http-server.local
+    - host: test.httpserver.local
       http:
         paths:
           - path: "/"
@@ -19,4 +19,4 @@ spec:
               service:
                 name: sample-http-server-svc
                 port:
-                  number: 8080
+                  number: 80
