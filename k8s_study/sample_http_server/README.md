@@ -93,14 +93,14 @@ $ cat test-sample-http-server.crt |base64 -w 0
 + 安装 ingress-nginx(k8smanifests/ingress-nginx-deployment.yaml)
   + 下载官网 deployment
 
-  ```bash
+```bash
 $ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
-  ```
+```
   + 更改 deployment image
   + 更改 ingress-nginx Service spec.type 为 NodePort
   + 配置 CA
 
-  ```bash
+```bash
   $ CA=$(kubectl -n ingress-nginx get secret ingress-nginx-admission -ojsonpath='{.data.ca}')
   $ kubectl patch validatingwebhookconfigurations ingress-nginx-admission --type='json' -p='[{"op": "add", "path": "/webhooks/0/clientConfig/caBundle", "value":"'$CA'"}]'
-  ```
+```
