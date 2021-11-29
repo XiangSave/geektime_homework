@@ -79,3 +79,12 @@ $ s nsenter  -t 14748 -n ip a
 ```bash
 $ k create configmap sample-http-server-conf --from-file=configs/
 ```
++ 创建 tls 证书
+
+```bash
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test-sample-http-server.key -out test-sample-http-server.crt -subj "/CN=test-sample-http-server.local/O=xiang"
+$ cat test-sample-http-server.key |base64 -w 0
+$ cat test-sample-http-server.crt |base64 -w 0
+
+
+```
