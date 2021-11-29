@@ -90,7 +90,7 @@ $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test-sample-http-s
 $ cat test-sample-http-server.key |base64 -w 0
 $ cat test-sample-http-server.crt |base64 -w 0
 ```
-+ 安装 ingress-nginx(k8smanifests/nginx-ingress-deployment.yaml)
++ 安装 ingress-nginx(k8smanifests/ingress-nginx-deployment.yaml)
   + 下载官网 deployment
 
   ```bash
