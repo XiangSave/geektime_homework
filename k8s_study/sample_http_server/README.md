@@ -72,10 +72,10 @@ $ s nsenter  -t 14748 -n ip a
 ### answer
 + kubernetes yaml 
   + deployment: k8smanifests/nginx-ingress-deployment.yaml
-  + conf：k8smanifests/sample-http-server-conf-comfigMap.yaml
+  + conf: k8smanifests/sample-http-server-conf-comfigMap.yaml
   + service: k8smanifests/sample-http-server-svc.yaml
-  + tls secret:k8smanifests/test-sample-http-server-tls-secret.yaml
-  + ingress:k8smanifests/http-server-ingress.yaml
+  + tls secret: k8smanifests/test-sample-http-server-tls-secret.yaml
+  + ingress: k8smanifests/http-server-ingress.yaml
 
 ### note
 #### 创建 configMap 存储配置文件
