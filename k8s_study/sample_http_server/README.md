@@ -92,6 +92,7 @@ $ cat test-sample-http-server.crt |base64 -w 0
 ```
 + 安装 ingress-nginx(k8smanifests/ingress-nginx-deployment.yaml)
   + 下载官网 deployment
+
 ```bash
 $ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
 ```
