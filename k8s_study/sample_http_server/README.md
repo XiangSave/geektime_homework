@@ -72,7 +72,7 @@ $ s nsenter  -t 14748 -n ip a
 ### answer
 + kubernetes yaml 
   + deployment: k8smanifests/nginx-ingress-deployment.yaml
-  + conf:sample-http-server-conf-comfigMap.yaml
+  + conf:k8smanifests/sample-http-server-conf-comfigMap.yaml
   + service: k8smanifests/sample-http-server-svc.yaml
   + tls secret:k8smanifests/test-sample-http-server-tls-secret.yaml
   + ingress:k8smanifests/http-server-ingress.yaml
@@ -93,9 +93,9 @@ $ cat test-sample-http-server.crt |base64 -w 0
 + 安装 ingress-nginx(k8smanifests/ingress-nginx-deployment.yaml)
   + 下载官网 deployment
 
-```bash
+  ```bash
 $ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
-```
+  ```
   + 更改 deployment image
   + 更改 ingress-nginx Service spec.type 为 NodePort
   + 配置 CA
