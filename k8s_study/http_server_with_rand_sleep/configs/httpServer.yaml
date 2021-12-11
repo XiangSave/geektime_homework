@@ -1,0 +1,6 @@
+---
+HttpServer:
+  ServiceSetting:
+    bindIP: "0.0.0.0"
+    port: 8080
+    logPath: "./logs/httpServer.log"
