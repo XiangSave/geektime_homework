@@ -78,7 +78,7 @@ $ k apply -f  k8smanifests/loki-grafana-ingress.yaml
 + windows set hosts to connect vm
 
 ```
-c:\windows\system32\drivers\etc
+c:\windows\system32\drivers\etc\hosts
 172.16.1.199 test.httpserver.local
 172.16.1.199 test.prometheus.local
 172.16.1.199 test.grafana.local
