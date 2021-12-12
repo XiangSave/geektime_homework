@@ -292,7 +292,7 @@ spec:
 ---
 # Source: ingress-nginx/templates/controller-deployment.yaml
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   labels:
     helm.sh/chart: ingress-nginx-4.0.10
@@ -394,7 +394,9 @@ spec:
             requests:
               cpu: 100m
               memory: 90Mi
+      hostNetwork: true
       nodeSelector:
+        app: ingress
         kubernetes.io/os: linux
       serviceAccountName: ingress-nginx
       terminationGracePeriodSeconds: 300
