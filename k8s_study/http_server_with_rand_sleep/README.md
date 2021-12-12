@@ -12,8 +12,13 @@
 + metrics:pkg/metrics
 + prometheus-ingress:k8smanifests/loki-grafana-ingress.yaml
 + grafana-ingress:k8smanifests/loki-grafana-ingress.yaml
++ prometheus :
+ 
+<img width="80%" height="80%" src="./images/http_metrics.png"  alt="httpserver_execution_used_second_bucket"/>
 
-<img width="60%" height="60%" src="./images/http_metrics.png"  alt="httpserver_execution_used_second_bucket"/>
++ grafana:
+
+<img width="80%" height="80%" src="./images/grafana_dashboard.png"  alt="grafana dashboard"/>
 
 ### note
 + ingress set hostnetwork
