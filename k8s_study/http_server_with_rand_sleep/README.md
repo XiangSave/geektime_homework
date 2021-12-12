@@ -75,7 +75,7 @@ $  watch -n 1 'curl https://172.16.1.199/metrics -H "host:test.httpserver.local"
 $ k apply -f  k8smanifests/loki-prometheus-ingress.yaml
 $ k apply -f  k8smanifests/loki-grafana-ingress.yaml
 ```
-+ windows set hosts to connect to vm
++ windows set hosts to connect vm
 
 ```
 c:\windows\system32\drivers\etc
