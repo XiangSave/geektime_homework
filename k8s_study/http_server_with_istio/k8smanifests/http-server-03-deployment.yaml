@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: http-server03
+  name: http-server03
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: http-server03
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+      labels:
+        app: http-server03
+    spec:
+      containers:
+      - image: http-server03:1.0
+        name: http-server03
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: conf
+            mountPath: "/root/configs"
+            readOnly: true
+          - name: host-logs
+            mountPath: "/root/logs"
+        # lifecycle:
+        #   preStop:
+        #     exec:
+        #       command: [ "/bin/sh", "-c", "sleep 25 && killall httpServer"]
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          failureThreshold: 60
+          periodSeconds: 10
+          timeoutSeconds: 3
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - name: conf
+          configMap:
+            name: http-server03-conf
+        - name: host-logs
+          hostPath:
+            path: /home/xiang/logs
+            type: DirectoryOrCreate

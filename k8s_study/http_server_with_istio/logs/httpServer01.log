@@ -1,0 +1,14 @@
+{"level":"info","msg":"{0.0.0.0 8080 ./logs/httpServer01.log}","time":"2021-12-26T14:32:06+08:00"}
+{"level":"info","msg":"http starting","time":"2021-12-26T14:32:06+08:00"}
+{"RemoteAddress":"172.16.0.240:52128","Status":200,"apiPath":"/aaa","level":"info","msg":"response: hello aaa","time":"2021-12-26T14:32:39+08:00"}
+{"level":"info","msg":"aaa","time":"2021-12-26T14:32:39+08:00"}
+{"level":"info","msg":"{0.0.0.0 8080 ./logs/httpServer01.log}","time":"2021-12-26T14:35:02+08:00"}
+{"level":"info","msg":"http starting","time":"2021-12-26T14:35:02+08:00"}
+{"level":"info","msg":"rand delay 362 ms","time":"2021-12-26T14:35:05+08:00"}
+{"RemoteAddress":"172.16.0.240:52110","Status":200,"apiPath":"/aaa","level":"info","msg":"response: hello aaa","time":"2021-12-26T14:35:06+08:00"}
+{"level":"info","msg":"aaa","time":"2021-12-26T14:35:06+08:00"}
+{"level":"info","msg":"{0.0.0.0 8080 ./logs/httpServer01.log}","time":"2021-12-26T14:36:09+08:00"}
+{"level":"info","msg":"http starting","time":"2021-12-26T14:36:09+08:00"}
+{"level":"info","msg":"rand delay 127 ms","time":"2021-12-26T14:36:17+08:00"}
+{"RemoteAddress":"172.16.0.240:52112","Status":200,"apiPath":"/aaa","level":"info","msg":"response: hello aaa","time":"2021-12-26T14:36:17+08:00"}
+{"level":"info","msg":"aaa","time":"2021-12-26T14:36:17+08:00"}

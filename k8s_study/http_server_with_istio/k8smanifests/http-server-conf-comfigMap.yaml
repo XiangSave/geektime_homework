@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: http-server01-conf
+data:
+  httpServer01.yaml: |
+    ---
+    HttpServer:
+      ServiceSetting:
+        bindIP: "0.0.0.0"
+        port: 8080
+        logPath: "./logs/httpServer1.log"
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: http-server02-conf
+data:
+  httpServer02.yaml: |
+    ---
+    HttpServer:
+      ServiceSetting:
+        bindIP: "0.0.0.0"
+        port: 8080
+        logPath: "./logs/httpServer2.log"
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: http-server03-conf
+data:
+  httpServer03.yaml: |
+    ---
+    HttpServer:
+      ServiceSetting:
+        bindIP: "0.0.0.0"
+        port: 8080
+        logPath: "./logs/httpServer3.log"
