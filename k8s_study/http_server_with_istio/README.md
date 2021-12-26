@@ -26,3 +26,11 @@
   # 将证书配置在 istio 上
   $ kubectl create -n istio-system secret tls http-server-credential --key=http-server.key --cert=http-server.crt
   ```
+  + 创建 svc、deployment、configMap、istio specs
+  
+  ```bash
+  $ k apply -f k8smanifests/http-server-conf-comfigMap.yaml
+  $ k apply -f k8smanifests/http-server-01-deployment.yaml
+  $ k apply -f k8smanifests/sample-http-server-svc.yaml
+  $ k apply -f k8smanifests/https-httpserver-istio-specs.yaml
+  ```
